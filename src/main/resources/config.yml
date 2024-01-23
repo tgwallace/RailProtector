@@ -1,0 +1,11 @@
+# Max distance that plugin will search in each direction for the end node. 0 means infinite.
+maxdistance: 0
+# Protection to be triggered when each of the following happens?:
+protections:
+  break: true
+  explode: true
+  burn: true
+  bucketempty: true
+  waterflow: true
+  place: true
+  piston: true
