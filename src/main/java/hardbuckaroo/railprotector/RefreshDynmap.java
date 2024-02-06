@@ -21,14 +21,18 @@ public class RefreshDynmap {
         if(m==null) return;
         plugin.getLogger().log(Level.INFO,"Checking Dynmap for rail removals.");
         for(AreaMarker am : m.getAreaMarkers()) {
-            World world = Bukkit.getServer().getWorld(am.getMarkerID().split(":")[0]);
-            String[] coords = am.getMarkerID().split(":")[1].split(",");
-            int x = Integer.parseInt(coords[0]);
-            int y = Integer.parseInt(coords[1]);
-            int z = Integer.parseInt(coords[2]);
-            Block block = world.getBlockAt(x,y,z);
-            if(!block.getBlockData().getMaterial().toString().contains("RAIL")) {
+            String[] coords = am.getMarkerID().split("\\.");
+            World world = Bukkit.getServer().getWorld(coords[0]);
+            if (world == null) {
                 am.deleteMarker();
+            } else {
+                int x = Integer.parseInt(coords[1]);
+                int y = Integer.parseInt(coords[2]);
+                int z = Integer.parseInt(coords[3]);
+                Block block = world.getBlockAt(x, y, z);
+                if (!block.getBlockData().getMaterial().toString().contains("RAIL")) {
+                    am.deleteMarker();
+                }
             }
         }
     }
