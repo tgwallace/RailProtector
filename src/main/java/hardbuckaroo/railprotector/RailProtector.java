@@ -15,6 +15,8 @@ public final class RailProtector extends JavaPlugin {
 
         if(Bukkit.getPluginManager().getPlugin("DynMap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && getConfig().getBoolean("Dynmap")) {
             dapi = (DynmapAPI) Bukkit.getServer().getPluginManager().getPlugin("dynmap");
+            RefreshDynmap refreshDynmap = new RefreshDynmap(this);
+            Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(this, refreshDynmap::updateDynMap, 30, 72000);
         }
     }
 

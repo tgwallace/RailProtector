@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Rail;
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -36,20 +37,6 @@ public class RailBreakWatcher implements Listener {
 
         if(traceRail(originalRail,event.getPlayer())
                 || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())
         ) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
@@ -64,20 +51,6 @@ public class RailBreakWatcher implements Listener {
 
         blocks.removeIf(originalRail -> traceRail(originalRail)
                 || traceRail(originalRail.getRelative(0,1,0))
-                || traceRail(originalRail.getRelative(0,-1,0))
-                || traceRail(originalRail.getRelative(0,-2,0))
-                || traceRail(originalRail.getRelative(1,0,0))
-                || traceRail(originalRail.getRelative(-1,0,0))
-                || traceRail(originalRail.getRelative(0,0,1))
-                || traceRail(originalRail.getRelative(0,0,-1))
-                || traceRail(originalRail.getRelative(1,1,0))
-                || traceRail(originalRail.getRelative(-1,1,0))
-                || traceRail(originalRail.getRelative(0,1,1))
-                || traceRail(originalRail.getRelative(0,1,-1))
-                || traceRail(originalRail.getRelative(1,-2,0))
-                || traceRail(originalRail.getRelative(-1,-2,0))
-                || traceRail(originalRail.getRelative(0,-2,1))
-                || traceRail(originalRail.getRelative(0,-2,-1))
         );
     }
 
@@ -89,20 +62,7 @@ public class RailBreakWatcher implements Listener {
 
         if(traceRail(originalRail)
                 || traceRail(originalRail.getRelative(0,1,0))
-                || traceRail(originalRail.getRelative(0,-1,0))
-                || traceRail(originalRail.getRelative(0,-2,0))
-                || traceRail(originalRail.getRelative(1,0,0))
-                || traceRail(originalRail.getRelative(-1,0,0))
-                || traceRail(originalRail.getRelative(0,0,1))
-                || traceRail(originalRail.getRelative(0,0,-1))
-                || traceRail(originalRail.getRelative(1,1,0))
-                || traceRail(originalRail.getRelative(-1,1,0))
-                || traceRail(originalRail.getRelative(0,1,1))
-                || traceRail(originalRail.getRelative(0,1,-1))
-                || traceRail(originalRail.getRelative(1,-2,0))
-                || traceRail(originalRail.getRelative(-1,-2,0))
-                || traceRail(originalRail.getRelative(0,-2,1))
-                || traceRail(originalRail.getRelative(0,-2,-1)))
+        )
             event.setCancelled(true);
     }
 
@@ -114,20 +74,6 @@ public class RailBreakWatcher implements Listener {
 
         blocks.removeIf(originalRail -> traceRail(originalRail)
                 || traceRail(originalRail.getRelative(0,1,0))
-                || traceRail(originalRail.getRelative(0,-1,0))
-                || traceRail(originalRail.getRelative(0,-2,0))
-                || traceRail(originalRail.getRelative(1,0,0))
-                || traceRail(originalRail.getRelative(-1,0,0))
-                || traceRail(originalRail.getRelative(0,0,1))
-                || traceRail(originalRail.getRelative(0,0,-1))
-                || traceRail(originalRail.getRelative(1,1,0))
-                || traceRail(originalRail.getRelative(-1,1,0))
-                || traceRail(originalRail.getRelative(0,1,1))
-                || traceRail(originalRail.getRelative(0,1,-1))
-                || traceRail(originalRail.getRelative(1,-2,0))
-                || traceRail(originalRail.getRelative(-1,-2,0))
-                || traceRail(originalRail.getRelative(0,-2,1))
-                || traceRail(originalRail.getRelative(0,-2,-1))
         );
     }
 
@@ -139,20 +85,6 @@ public class RailBreakWatcher implements Listener {
 
         if(traceRail(originalRail,event.getPlayer())
                 || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())
         ) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
@@ -167,20 +99,6 @@ public class RailBreakWatcher implements Listener {
 
         if(traceRail(originalRail)
                 || traceRail(originalRail.getRelative(0,1,0))
-                || traceRail(originalRail.getRelative(0,-1,0))
-                || traceRail(originalRail.getRelative(0,-2,0))
-                || traceRail(originalRail.getRelative(1,0,0))
-                || traceRail(originalRail.getRelative(-1,0,0))
-                || traceRail(originalRail.getRelative(0,0,1))
-                || traceRail(originalRail.getRelative(0,0,-1))
-                || traceRail(originalRail.getRelative(1,1,0))
-                || traceRail(originalRail.getRelative(-1,1,0))
-                || traceRail(originalRail.getRelative(0,1,1))
-                || traceRail(originalRail.getRelative(0,1,-1))
-                || traceRail(originalRail.getRelative(1,-2,0))
-                || traceRail(originalRail.getRelative(-1,-2,0))
-                || traceRail(originalRail.getRelative(0,-2,1))
-                || traceRail(originalRail.getRelative(0,-2,-1))
         ) {
             event.setCancelled(true);
         }
@@ -197,21 +115,8 @@ public class RailBreakWatcher implements Listener {
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
         else if(traceRail(originalRail,event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
                 || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
-                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
-                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())){
+        ){
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
@@ -226,20 +131,7 @@ public class RailBreakWatcher implements Listener {
         for(Block originalRail : blocks){
             if(traceRail(originalRail)
                     || traceRail(originalRail.getRelative(0,1,0))
-                    || traceRail(originalRail.getRelative(0,-1,0))
-                    || traceRail(originalRail.getRelative(0,-2,0))
-                    || traceRail(originalRail.getRelative(1,0,0))
-                    || traceRail(originalRail.getRelative(-1,0,0))
-                    || traceRail(originalRail.getRelative(0,0,1))
-                    || traceRail(originalRail.getRelative(0,0,-1))
-                    || traceRail(originalRail.getRelative(1,1,0))
-                    || traceRail(originalRail.getRelative(-1,1,0))
-                    || traceRail(originalRail.getRelative(0,1,1))
-                    || traceRail(originalRail.getRelative(0,1,-1))
-                    || traceRail(originalRail.getRelative(1,-2,0))
-                    || traceRail(originalRail.getRelative(-1,-2,0))
-                    || traceRail(originalRail.getRelative(0,-2,1))
-                    || traceRail(originalRail.getRelative(0,-2,-1)))
+            )
                 event.setCancelled(true);
         }
     }
@@ -253,20 +145,7 @@ public class RailBreakWatcher implements Listener {
         for(Block originalRail : blocks){
             if(traceRail(originalRail)
                     || traceRail(originalRail.getRelative(0,1,0))
-                    || traceRail(originalRail.getRelative(0,-1,0))
-                    || traceRail(originalRail.getRelative(0,-2,0))
-                    || traceRail(originalRail.getRelative(1,0,0))
-                    || traceRail(originalRail.getRelative(-1,0,0))
-                    || traceRail(originalRail.getRelative(0,0,1))
-                    || traceRail(originalRail.getRelative(0,0,-1))
-                    || traceRail(originalRail.getRelative(1,1,0))
-                    || traceRail(originalRail.getRelative(-1,1,0))
-                    || traceRail(originalRail.getRelative(0,1,1))
-                    || traceRail(originalRail.getRelative(0,1,-1))
-                    || traceRail(originalRail.getRelative(1,-2,0))
-                    || traceRail(originalRail.getRelative(-1,-2,0))
-                    || traceRail(originalRail.getRelative(0,-2,1))
-                    || traceRail(originalRail.getRelative(0,-2,-1)))
+                    || traceRail(originalRail.getRelative(0,-1,0)))
                 event.setCancelled(true);
         }
     }
@@ -289,12 +168,6 @@ public class RailBreakWatcher implements Listener {
 
     public boolean traceRail(Block originalRail, Player player) {
         if (!originalRail.getBlockData().getMaterial().toString().contains("RAIL")) return false;
-
-        DynmapAPI dynmap = plugin.dapi;
-        Set<MarkerSet> allSets = dynmap.getMarkerAPI().getMarkerSets();
-        for(MarkerSet delete : allSets) {
-            delete.deleteMarkerSet();
-        }
 
         boolean isProt1 = false, isProt2 = false, isWild1 = true, isWild2 = true;
         int maxDistance = Bukkit.spigot().getConfig().getInt("maxdistance"), currentDistance = 0;
@@ -557,18 +430,31 @@ public class RailBreakWatcher implements Listener {
                     }
                 }
                 if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                    DynmapAPI dynmap = plugin.dapi;
                     MarkerSet m;
                     if(dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") == null) {
                         m = dynmap.getMarkerAPI().createMarkerSet("RailProtect.markerset", "Rail Lines", dynmap.getMarkerAPI().getMarkerIcons(), false);
                     } else {
                         m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
                     }
-                    AreaMarker am = m.createAreaMarker(frontRail.getLocation().toString(), "Rail Line", true, frontRail.getWorld().getName(), new double[]{frontRail.getX() - 1, frontRail.getX() + 1}, new double[]{frontRail.getZ() - 1, frontRail.getZ() + 1}, false);
+                    AreaMarker am = m.createAreaMarker(frontRail.getWorld().getName()+":"+frontRail.getX()+","+frontRail.getY()+","+frontRail.getZ(), "Rail Line", true, frontRail.getWorld().getName(), new double[]{frontRail.getX(), frontRail.getX()}, new double[]{frontRail.getZ(), frontRail.getZ()}, false);
+                    if(am!=null) {
                     am.setFillStyle(1, 0x000000);
                     am.setLineStyle(1, 1, 0x000000);
+                    }
                 }
             }
-            if(frontRail.equals(originalRail)) return false;
+            if(frontRail.equals(originalRail)){
+                if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                    DynmapAPI dynmap = plugin.dapi;
+                    if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
+                        MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+                        AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
+                        if(am!=null) am.deleteMarker();
+                    }
+                }
+                return false;
+            }
 
             List<Player> playerList = originalRail.getWorld().getPlayers();
             if(playerList.isEmpty()) return true;
@@ -580,26 +466,58 @@ public class RailBreakWatcher implements Listener {
             ServerPlayer fakeSP = new ServerPlayer(server, level, gameProfile, ClientInformation.createDefault());
             Player fakePlayer = fakeSP.getBukkitEntity().getPlayer();
 
-            BlockBreakEvent playerBreakEvent = new BlockBreakEvent(frontRail, player);
-            Bukkit.getPluginManager().callEvent(playerBreakEvent);
-            if (playerBreakEvent.isCancelled()) {
-                if(x==1) isProt1 = true;
-                if(x==2) isProt2 = true;
-            } else playerBreakEvent.setCancelled(true);
+            if(frontRail.getType() == Material.OBSIDIAN && frontRail.getRelative(BlockFace.UP).getType() == Material.OBSIDIAN) {
+                BlockBreakEvent playerBreakEvent = new BlockBreakEvent(frontRail, player);
+                Bukkit.getPluginManager().callEvent(playerBreakEvent);
+                if (playerBreakEvent.isCancelled()) {
+                    if (x == 1) isProt1 = true;
+                    if (x == 2) isProt2 = true;
+                } else playerBreakEvent.setCancelled(true);
 
-            BlockBreakEvent anonBreakEvent = new BlockBreakEvent(frontRail, fakePlayer);
-            Bukkit.getPluginManager().callEvent(anonBreakEvent);
-            if (anonBreakEvent.isCancelled()) {
-                if(x==1) isWild1 = false;
-                if(x==2) isWild2 = false;
-            } else anonBreakEvent.setCancelled(true);
+                BlockBreakEvent anonBreakEvent = new BlockBreakEvent(frontRail, fakePlayer);
+                Bukkit.getPluginManager().callEvent(anonBreakEvent);
+                if (anonBreakEvent.isCancelled()) {
+                    if (x == 1) isWild1 = false;
+                    if (x == 2) isWild2 = false;
+                } else anonBreakEvent.setCancelled(true);
+            }
         }
 
         if(isProt1 && isProt2) return true;
-        else if(isProt1 && !isWild1 && !isProt2 && !isWild2) return false;
-        else if(isProt2 && !isWild2 && !isProt1 && !isWild1) return false;
+        else if(isProt1 && !isWild1 && !isProt2 && !isWild2) {
+            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                DynmapAPI dynmap = plugin.dapi;
+                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
+                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
+                    if(am!=null) am.deleteMarker();
+                }
+            }
+            return false;
+        }
+        else if(isProt2 && !isWild2 && !isProt1 && !isWild1) {
+            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                DynmapAPI dynmap = plugin.dapi;
+                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
+                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
+                    if(am!=null) am.deleteMarker();
+                }
+            }
+            return false;
+        }
         else if (isProt1 && isWild2) return true;
         else if (isProt2 && isWild1) return true;
-        else return false;
+        else {
+            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                DynmapAPI dynmap = plugin.dapi;
+                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
+                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
+                    if(am!=null) am.deleteMarker();
+                }
+            }
+            return false;
+        }
     }
 }
