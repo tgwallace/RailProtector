@@ -17,6 +17,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.dynmap.DynmapAPI;
+import org.dynmap.markers.AreaMarker;
+import org.dynmap.markers.MarkerSet;
 
 import java.util.*;
 
@@ -31,7 +34,23 @@ public class RailBreakWatcher implements Listener {
         if(!plugin.getConfig().getBoolean("protections.break")) return;
         Block originalRail = event.getBlock();
 
-        if(traceRail(originalRail,event.getPlayer()) || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())) {
+        if(traceRail(originalRail,event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())
+        ) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
@@ -43,16 +62,47 @@ public class RailBreakWatcher implements Listener {
 
         List<Block> blocks = event.blockList();
 
-        blocks.removeIf(block -> traceRail(block) || traceRail(block.getRelative(0, 1, 0)));
+        blocks.removeIf(originalRail -> traceRail(originalRail)
+                || traceRail(originalRail.getRelative(0,1,0))
+                || traceRail(originalRail.getRelative(0,-1,0))
+                || traceRail(originalRail.getRelative(0,-2,0))
+                || traceRail(originalRail.getRelative(1,0,0))
+                || traceRail(originalRail.getRelative(-1,0,0))
+                || traceRail(originalRail.getRelative(0,0,1))
+                || traceRail(originalRail.getRelative(0,0,-1))
+                || traceRail(originalRail.getRelative(1,1,0))
+                || traceRail(originalRail.getRelative(-1,1,0))
+                || traceRail(originalRail.getRelative(0,1,1))
+                || traceRail(originalRail.getRelative(0,1,-1))
+                || traceRail(originalRail.getRelative(1,-2,0))
+                || traceRail(originalRail.getRelative(-1,-2,0))
+                || traceRail(originalRail.getRelative(0,-2,1))
+                || traceRail(originalRail.getRelative(0,-2,-1))
+        );
     }
 
     @EventHandler (ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onBlockBurnEvent(BlockBurnEvent event) {
         if(!plugin.getConfig().getBoolean("protections.burn")) return;
 
-        Block block = event.getBlock();
+        Block originalRail = event.getBlock();
 
-        if(traceRail(block) || traceRail(block.getRelative(0, 1, 0)))
+        if(traceRail(originalRail)
+                || traceRail(originalRail.getRelative(0,1,0))
+                || traceRail(originalRail.getRelative(0,-1,0))
+                || traceRail(originalRail.getRelative(0,-2,0))
+                || traceRail(originalRail.getRelative(1,0,0))
+                || traceRail(originalRail.getRelative(-1,0,0))
+                || traceRail(originalRail.getRelative(0,0,1))
+                || traceRail(originalRail.getRelative(0,0,-1))
+                || traceRail(originalRail.getRelative(1,1,0))
+                || traceRail(originalRail.getRelative(-1,1,0))
+                || traceRail(originalRail.getRelative(0,1,1))
+                || traceRail(originalRail.getRelative(0,1,-1))
+                || traceRail(originalRail.getRelative(1,-2,0))
+                || traceRail(originalRail.getRelative(-1,-2,0))
+                || traceRail(originalRail.getRelative(0,-2,1))
+                || traceRail(originalRail.getRelative(0,-2,-1)))
             event.setCancelled(true);
     }
 
@@ -62,16 +112,48 @@ public class RailBreakWatcher implements Listener {
 
         List<Block> blocks = event.blockList();
 
-        blocks.removeIf(block -> traceRail(block) || traceRail(block.getRelative(0, 1, 0)));
+        blocks.removeIf(originalRail -> traceRail(originalRail)
+                || traceRail(originalRail.getRelative(0,1,0))
+                || traceRail(originalRail.getRelative(0,-1,0))
+                || traceRail(originalRail.getRelative(0,-2,0))
+                || traceRail(originalRail.getRelative(1,0,0))
+                || traceRail(originalRail.getRelative(-1,0,0))
+                || traceRail(originalRail.getRelative(0,0,1))
+                || traceRail(originalRail.getRelative(0,0,-1))
+                || traceRail(originalRail.getRelative(1,1,0))
+                || traceRail(originalRail.getRelative(-1,1,0))
+                || traceRail(originalRail.getRelative(0,1,1))
+                || traceRail(originalRail.getRelative(0,1,-1))
+                || traceRail(originalRail.getRelative(1,-2,0))
+                || traceRail(originalRail.getRelative(-1,-2,0))
+                || traceRail(originalRail.getRelative(0,-2,1))
+                || traceRail(originalRail.getRelative(0,-2,-1))
+        );
     }
 
     @EventHandler (ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onBucketEmptyEvent(PlayerBucketEmptyEvent event) {
         if(!plugin.getConfig().getBoolean("protections.bucketempty")) return;
 
-        Block block = event.getBlock();
+        Block originalRail = event.getBlock();
 
-        if(traceRail(block,event.getPlayer()) || traceRail(block.getRelative(0,-1,0),event.getPlayer())) {
+        if(traceRail(originalRail,event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())
+        ) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
@@ -81,9 +163,25 @@ public class RailBreakWatcher implements Listener {
     public void onBlockFromToEvent(BlockFromToEvent event) {
         if(!plugin.getConfig().getBoolean("protections.waterflow")) return;
 
-        Block block = event.getToBlock().getRelative(0,-1,0);
+        Block originalRail = event.getToBlock().getRelative(0,-1,0);
 
-        if(traceRail(block)) {
+        if(traceRail(originalRail)
+                || traceRail(originalRail.getRelative(0,1,0))
+                || traceRail(originalRail.getRelative(0,-1,0))
+                || traceRail(originalRail.getRelative(0,-2,0))
+                || traceRail(originalRail.getRelative(1,0,0))
+                || traceRail(originalRail.getRelative(-1,0,0))
+                || traceRail(originalRail.getRelative(0,0,1))
+                || traceRail(originalRail.getRelative(0,0,-1))
+                || traceRail(originalRail.getRelative(1,1,0))
+                || traceRail(originalRail.getRelative(-1,1,0))
+                || traceRail(originalRail.getRelative(0,1,1))
+                || traceRail(originalRail.getRelative(0,1,-1))
+                || traceRail(originalRail.getRelative(1,-2,0))
+                || traceRail(originalRail.getRelative(-1,-2,0))
+                || traceRail(originalRail.getRelative(0,-2,1))
+                || traceRail(originalRail.getRelative(0,-2,-1))
+        ) {
             event.setCancelled(true);
         }
     }
@@ -92,18 +190,28 @@ public class RailBreakWatcher implements Listener {
     public void onBlockPlaceEvent(BlockPlaceEvent event) {
         if(!plugin.getConfig().getBoolean("protections.place")) return;
 
-        Block block = event.getBlock();
+        Block originalRail = event.getBlock();
 
-        if(block.getBlockData().getMaterial().isSolid() && traceRail(block.getRelative(0,-1,0),event.getPlayer())) {
+        if(originalRail.getBlockData().getMaterial().isSolid() && traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
-        else if((block.getBlockData().getMaterial().toString().contains("RAIL") || block.getBlockData().getMaterial().equals(Material.REDSTONE_WIRE) || block.getBlockData().getMaterial().equals(Material.TNT))
-                && (traceRail(block.getRelative(1, 0, 0),event.getPlayer())
-                || traceRail(block.getRelative(-1, 0, 0),event.getPlayer())
-                || traceRail(block.getRelative(0, 0, 1),event.getPlayer())
-                || traceRail(block.getRelative(0, 0, -1),event.getPlayer())
-                || traceRail(block.getRelative(0, 2, 0),event.getPlayer()))){
+        else if(traceRail(originalRail,event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,0,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,0,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,1,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,1,-1),event.getPlayer())
+                || traceRail(originalRail.getRelative(1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(-1,-2,0),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,1),event.getPlayer())
+                || traceRail(originalRail.getRelative(0,-2,-1),event.getPlayer())){
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
         }
@@ -115,8 +223,23 @@ public class RailBreakWatcher implements Listener {
 
         List<Block> blocks = event.getBlocks();
 
-        for(Block block : blocks){
-            if(traceRail(block) || traceRail(block.getRelative(0, 1, 0)))
+        for(Block originalRail : blocks){
+            if(traceRail(originalRail)
+                    || traceRail(originalRail.getRelative(0,1,0))
+                    || traceRail(originalRail.getRelative(0,-1,0))
+                    || traceRail(originalRail.getRelative(0,-2,0))
+                    || traceRail(originalRail.getRelative(1,0,0))
+                    || traceRail(originalRail.getRelative(-1,0,0))
+                    || traceRail(originalRail.getRelative(0,0,1))
+                    || traceRail(originalRail.getRelative(0,0,-1))
+                    || traceRail(originalRail.getRelative(1,1,0))
+                    || traceRail(originalRail.getRelative(-1,1,0))
+                    || traceRail(originalRail.getRelative(0,1,1))
+                    || traceRail(originalRail.getRelative(0,1,-1))
+                    || traceRail(originalRail.getRelative(1,-2,0))
+                    || traceRail(originalRail.getRelative(-1,-2,0))
+                    || traceRail(originalRail.getRelative(0,-2,1))
+                    || traceRail(originalRail.getRelative(0,-2,-1)))
                 event.setCancelled(true);
         }
     }
@@ -127,8 +250,23 @@ public class RailBreakWatcher implements Listener {
 
         List<Block> blocks = event.getBlocks();
 
-        for(Block block : blocks){
-            if(traceRail(block) || traceRail(block.getRelative(0, 1, 0)))
+        for(Block originalRail : blocks){
+            if(traceRail(originalRail)
+                    || traceRail(originalRail.getRelative(0,1,0))
+                    || traceRail(originalRail.getRelative(0,-1,0))
+                    || traceRail(originalRail.getRelative(0,-2,0))
+                    || traceRail(originalRail.getRelative(1,0,0))
+                    || traceRail(originalRail.getRelative(-1,0,0))
+                    || traceRail(originalRail.getRelative(0,0,1))
+                    || traceRail(originalRail.getRelative(0,0,-1))
+                    || traceRail(originalRail.getRelative(1,1,0))
+                    || traceRail(originalRail.getRelative(-1,1,0))
+                    || traceRail(originalRail.getRelative(0,1,1))
+                    || traceRail(originalRail.getRelative(0,1,-1))
+                    || traceRail(originalRail.getRelative(1,-2,0))
+                    || traceRail(originalRail.getRelative(-1,-2,0))
+                    || traceRail(originalRail.getRelative(0,-2,1))
+                    || traceRail(originalRail.getRelative(0,-2,-1)))
                 event.setCancelled(true);
         }
     }
@@ -151,6 +289,12 @@ public class RailBreakWatcher implements Listener {
 
     public boolean traceRail(Block originalRail, Player player) {
         if (!originalRail.getBlockData().getMaterial().toString().contains("RAIL")) return false;
+
+        DynmapAPI dynmap = plugin.dapi;
+        Set<MarkerSet> allSets = dynmap.getMarkerAPI().getMarkerSets();
+        for(MarkerSet delete : allSets) {
+            delete.deleteMarkerSet();
+        }
 
         boolean isProt1 = false, isProt2 = false, isWild1 = true, isWild2 = true;
         int maxDistance = Bukkit.spigot().getConfig().getInt("maxdistance"), currentDistance = 0;
@@ -411,6 +555,17 @@ public class RailBreakWatcher implements Listener {
                         backRail = frontRail;
                         frontRail = frontRail.getRelative(-1, 0, 0);
                     }
+                }
+                if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+                    MarkerSet m;
+                    if(dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") == null) {
+                        m = dynmap.getMarkerAPI().createMarkerSet("RailProtect.markerset", "Rail Lines", dynmap.getMarkerAPI().getMarkerIcons(), false);
+                    } else {
+                        m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+                    }
+                    AreaMarker am = m.createAreaMarker(frontRail.getLocation().toString(), "Rail Line", true, frontRail.getWorld().getName(), new double[]{frontRail.getX() - 1, frontRail.getX() + 1}, new double[]{frontRail.getZ() - 1, frontRail.getZ() + 1}, false);
+                    am.setFillStyle(1, 0x000000);
+                    am.setLineStyle(1, 1, 0x000000);
                 }
             }
             if(frontRail.equals(originalRail)) return false;

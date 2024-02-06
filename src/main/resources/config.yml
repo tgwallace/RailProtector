@@ -1,5 +1,7 @@
 # Max distance that plugin will search in each direction for the end node. 0 means infinite.
 maxdistance: 0
+# Enables or disables Dynmap integration for rail lines.
+Dynmap: true
 # Protection to be triggered when each of the following happens?:
 protections:
   break: true
