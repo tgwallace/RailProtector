@@ -381,6 +381,17 @@ public class RailBreakWatcher implements Listener {
         ) {
             event.setCancelled(true);
             event.getPlayer().sendRawMessage("That rail is protected by RailProtector.");
+        } else if(originalRail.getBlockData().getMaterial().toString().contains("RAIL") && Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
+            DynmapAPI dynmap = plugin.dapi;
+            MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
+            if(m == null) {
+                m = dynmap.getMarkerAPI().createMarkerSet("RailProtect.markerset", "Rail Lines", null, false);
+            }
+            AreaMarker am = m.createAreaMarker(originalRail.getWorld().getName()+"."+originalRail.getX()+"."+originalRail.getY()+"."+originalRail.getZ(), "Rail Line", true, originalRail.getWorld().getName(), new double[]{originalRail.getX(), originalRail.getX()+1}, new double[]{originalRail.getZ(), originalRail.getZ()+1}, false);
+            if(am!=null) {
+                am.setFillStyle(1, 0x000000);
+                am.setLineStyle(1, 1, 0x000000);
+            }
         }
     }
 
@@ -767,30 +778,8 @@ public class RailBreakWatcher implements Listener {
                         frontRail = frontRail.getRelative(-1, 0, 0);
                     }
                 }
-                if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
-                    DynmapAPI dynmap = plugin.dapi;
-                    MarkerSet m;
-                    if(dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") == null) {
-                        m = dynmap.getMarkerAPI().createMarkerSet("RailProtect.markerset", "Rail Lines", dynmap.getMarkerAPI().getMarkerIcons(), false);
-                    } else {
-                        m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
-                    }
-                    AreaMarker am = m.createAreaMarker(frontRail.getWorld().getName()+":"+frontRail.getX()+","+frontRail.getY()+","+frontRail.getZ(), "Rail Line", true, frontRail.getWorld().getName(), new double[]{frontRail.getX(), frontRail.getX()}, new double[]{frontRail.getZ(), frontRail.getZ()}, false);
-                    if(am!=null) {
-                    am.setFillStyle(1, 0x000000);
-                    am.setLineStyle(1, 1, 0x000000);
-                    }
-                }
             }
             if(frontRail.equals(originalRail)){
-                if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
-                    DynmapAPI dynmap = plugin.dapi;
-                    if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
-                        MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
-                        AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
-                        if(am!=null) am.deleteMarker();
-                    }
-                }
                 return false;
             }
 
@@ -823,38 +812,14 @@ public class RailBreakWatcher implements Listener {
 
         if(isProt1 && isProt2) return true;
         else if(isProt1 && !isWild1 && !isProt2 && !isWild2) {
-            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
-                DynmapAPI dynmap = plugin.dapi;
-                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
-                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
-                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
-                    if(am!=null) am.deleteMarker();
-                }
-            }
             return false;
         }
         else if(isProt2 && !isWild2 && !isProt1 && !isWild1) {
-            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
-                DynmapAPI dynmap = plugin.dapi;
-                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
-                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
-                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
-                    if(am!=null) am.deleteMarker();
-                }
-            }
             return false;
         }
         else if (isProt1 && isWild2) return true;
         else if (isProt2 && isWild1) return true;
         else {
-            if(Bukkit.getPluginManager().getPlugin("dynmap") != null && Bukkit.getServer().getPluginManager().getPlugin("dynmap").isEnabled() && plugin.getConfig().getBoolean("Dynmap")) {
-                DynmapAPI dynmap = plugin.dapi;
-                if (dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset") != null) {
-                    MarkerSet m = dynmap.getMarkerAPI().getMarkerSet("RailProtect.markerset");
-                    AreaMarker am = m.findAreaMarker(originalRail.getWorld().getName()+":"+originalRail.getX()+","+originalRail.getY()+","+originalRail.getZ());
-                    if(am!=null) am.deleteMarker();
-                }
-            }
             return false;
         }
     }
